@@ -30,7 +30,7 @@ const CONFIG = {
   whatsappNumber: "918291574739",
 
   // How many images to look for in assets/gallery/ (1.jpg, 2.jpg, ...)
-  galleryCount: 5,
+  galleryCount: 6,
 
   // How many diyas to show in the interactive row
   diyaCount: 7
