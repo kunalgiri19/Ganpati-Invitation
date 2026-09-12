@@ -9,28 +9,28 @@ const CONFIG = {
   heroTitle: "The Nanekar Family's Ganpati Celebration",
 
   // ISO date-times with your local UTC offset, e.g. +05:30 for India
-  sthapanaDateTime: "2026-09-14T11:00:00+05:30",
+  sthapanaDateTime: "2026-09-14T04:00:00+05:30",
   sthapanaDateLabel: "Monday, 14 September 2026",
-  sthapanaTimeLabel: "11:00 AM (Madhyahna Muhurat)",
+  sthapanaTimeLabel: "4:00 AM (Madhyahna Muhurat)",
 
-  visarjanDateTime: "2026-09-25T17:00:00+05:30",
+  visarjanDateTime: "2026-09-25T20:00:00+05:30",
   visarjanDateLabel: "Friday, 15 September 2026",
-  visarjanTimeLabel: "5:00 PM",
+  visarjanTimeLabel: "8:00 PM",
 
   venueName: "Our home",
-  venueAddress: "314, Omkar Sai CHS, Near Sai Mandir, Jeevan Vikas Kendra Marg, Kaldongri, VileParle East",
+  venueAddress: "312, Omkar Sai CHS, Near Sai Mandir, Jeevan Vikas Kendra Marg, Kaldongri, VileParle East",
   mapsQuery: "Omkar Sai CHS LTD, Sai Mandir Marg, Shivaji Nagar, Navapada, Vile Parle, Mumbai 400057",
 
   aarti: [
-    { label: "Morning aarti", time: "12:00 PM" },
-    { label: "Evening aarti", time: "7:30 PM" }
+    { label: "Morning aarti", time: "1:00 PM apx" },
+    { label: "Evening aarti", time: "8:00 PM apx" }
   ],
 
   // Country code + number, digits only, no + or spaces (e.g. 91 for India)
   whatsappNumber: "918291574739",
 
   // How many images to look for in assets/gallery/ (1.jpg, 2.jpg, ...)
-  galleryCount: 6,
+  galleryCount: 5,
 
   // How many diyas to show in the interactive row
   diyaCount: 7
