@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ganpati Bappa Morya — You're Invited</title>
+<meta name="description" content="You're invited to our Ganesh Chaturthi celebration." />
+
+<!-- These two tags control the preview card when this link is shared on WhatsApp / social apps.
+     Edit the content= values, and swap og:image once you've added assets/ganpati-photo.jpg -->
+<meta property="og:title" content="You're invited — Ganpati Celebration" />
+<meta property="og:description" content="Join us for our Ganesh Chaturthi celebrations." />
+<meta property="og:image" content="assets/ganpati-photo.jpg" />
+<meta name="theme-color" content="#5C1524" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Ambient falling petals, purely decorative -->
+<div id="petal-layer" aria-hidden="true"></div>
+
+<!-- ===================== ENTRANCE ===================== -->
+<div id="entrance">
+  <div class="entrance-inner">
+    <span class="om" aria-hidden="true">ॐ</span>
+    <p class="entrance-kicker">Ganesh Chaturthi</p>
+    <h1 class="entrance-title">Ganpati Bappa<br />Morya</h1>
+    <button id="open-btn" type="button">
+      <span aria-hidden="true">🪔</span> Open the invitation
+    </button>
+  </div>
+</div>
+
+<!-- ===================== MAIN CONTENT ===================== -->
+<main id="main" hidden>
+
+  <button id="audio-btn" type="button" aria-label="Play background music" aria-pressed="false">🔈</button>
+  <audio id="bg-audio" loop preload="none">
+    <!-- Add your own MP3 at assets/bhajan.mp3 — see README for details -->
+    <source src="assets/bhajan.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="kicker">You are lovingly invited to</p>
+    <h1 id="hero-title">Our Ganpati Celebration</h1>
+
+    <svg class="toran" viewBox="0 0 800 30" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <pattern id="toranPattern" width="40" height="30" patternUnits="userSpaceOnUse">
+          <line x1="0" y1="2" x2="40" y2="2" stroke="#B8860B" stroke-width="1.5" />
+          <path d="M8 2 L20 24 L32 2 Z" fill="#F6A421" />
+          <circle cx="20" cy="27" r="2.2" fill="#E2492D" />
+        </pattern>
+      </defs>
+      <rect width="800" height="30" fill="url(#toranPattern)" />
+    </svg>
+
+    <div class="hero-frame">
+      <!-- Replace with your own idol / decoration photo at assets/ganpati-photo.jpg -->
+      <img src="assets/ganpati-photo.jpg" alt="Our Ganpati idol" id="hero-photo" />
+    </div>
+    <p class="hero-note">Come seek Bappa's blessings with us</p>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section class="band countdown">
+    <h2>Sthapana begins in</h2>
+    <div class="countdown-grid" id="cd-grid">
+      <div class="cd-box"><span id="cd-d">00</span><label>Days</label></div>
+      <div class="cd-box"><span id="cd-h">00</span><label>Hours</label></div>
+      <div class="cd-box"><span id="cd-m">00</span><label>Min</label></div>
+      <div class="cd-box"><span id="cd-s">00</span><label>Sec</label></div>
+    </div>
+    <p id="cd-done" hidden>Bappa is home. 🙏</p>
+  </section>
+
+  <!-- DETAILS -->
+  <section class="details">
+    <h2>When &amp; where</h2>
+    <div class="detail-grid">
+      <article class="detail-card">
+        <h3>Sthapana</h3>
+        <p class="detail-date" id="sthapana-date">—</p>
+        <p class="detail-time" id="sthapana-time">—</p>
+      </article>
+      <article class="detail-card">
+        <h3>Visarjan</h3>
+        <p class="detail-date" id="visarjan-date">—</p>
+        <p class="detail-time" id="visarjan-time">—</p>
+      </article>
+      <article class="detail-card wide">
+        <h3>Venue</h3>
+        <p id="venue-name">—</p>
+        <p id="venue-address">—</p>
+        <div class="detail-actions">
+          <a id="directions-link" href="#" target="_blank" rel="noopener">Get directions</a>
+          <button id="calendar-btn" type="button">Add to calendar</button>
+        </div>
+      </article>
+    </div>
+
+    <div class="aarti-card">
+      <h3>Aarti timings</h3>
+      <ul id="aarti-list"></ul>
+    </div>
+  </section>
+
+  <!-- DIYA INTERACTIVE -->
+  <section class="band diya-section">
+    <h2>Light a diya for Bappa</h2>
+    <p class="diya-sub">Tap each one</p>
+    <div class="diya-row" id="diya-row"></div>
+    <p id="diya-message">&nbsp;</p>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery">
+    <h2>Our celebration</h2>
+    <div class="gallery-grid" id="gallery-grid"></div>
+  </section>
+
+  <!-- RSVP -->
+  <section class="rsvp">
+    <h2>Say you'll come</h2>
+    <form id="rsvp-form">
+      <label>Your name
+        <input type="text" name="name" required />
+      </label>
+      <label>Guests joining
+        <input type="number" name="guests" min="1" value="1" required />
+      </label>
+      <label>Message <span class="optional">(optional)</span>
+        <textarea name="message" rows="3"></textarea>
+      </label>
+      <button type="submit">Send RSVP</button>
+    </form>
+    <p class="rsvp-note">This opens WhatsApp with your message filled in.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-line">Ganpati Bappa Morya,<br />Mangal Murti Morya</p>
+    <button id="share-btn" type="button">Share this invitation</button>
+    <p class="footer-credit" id="footer-credit">—</p>
+  </footer>
+
+</main>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" hidden>
+  <button id="lightbox-close" type="button" aria-label="Close photo">×</button>
+  <img id="lightbox-img" src="" alt="" />
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

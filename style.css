@@ -1,0 +1,485 @@
+/* =========================================================
+   GANPATI INVITATION — STYLES
+   Palette, type and motifs are deliberately drawn from the
+   festival itself (diyas, marigold, sindoor, temple gold)
+   rather than a generic template look.
+   ========================================================= */
+
+:root{
+  /* --- color tokens --- */
+  --cream:        #FBF2DE;   /* turmeric-kissed ivory background */
+  --cream-deep:   #F6E7C4;   /* slightly deeper cream for cards/bands */
+  --maroon:       #5C1524;   /* deep sindoor maroon — headings/text */
+  --maroon-ink:   #2A1610;   /* near-black warm ink for body copy */
+  --vermilion:    #C23A20;   /* sindoor vermilion — primary accent */
+  --marigold:     #F6A421;   /* marigold / turmeric orange */
+  --gold:         #B8860B;   /* temple gold — hairlines, borders */
+  --dusk:         #2C1220;   /* deep aubergine-maroon night sky */
+  --dusk-light:   #4A1F32;   /* lighter dusk for gradients */
+
+  /* --- type --- */
+  --font-display: 'Yatra One', cursive;
+  --font-body: 'Poppins', sans-serif;
+
+  /* --- layout --- */
+  --content-width: 720px;
+  --radius-soft: 18px;
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+
+html{ scroll-behavior: smooth; }
+
+body{
+  margin: 0;
+  background: var(--cream);
+  color: var(--maroon-ink);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3{
+  font-family: var(--font-display);
+  color: var(--maroon);
+  margin: 0 0 .4em;
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+p{ margin: 0 0 1em; }
+
+[hidden]{ display: none !important; }
+
+img{ max-width: 100%; display: block; }
+
+a{ color: var(--vermilion); }
+
+/* Focus visibility for keyboard users */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible{
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* Shared button look */
+button, .btn{
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: .95rem;
+  border: none;
+  border-radius: 999px;
+  padding: .85em 1.6em;
+  cursor: pointer;
+  background: var(--vermilion);
+  color: var(--cream);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+button:hover, .btn:hover{ transform: translateY(-1px); box-shadow: 0 6px 16px rgba(194,58,32,.35); }
+button:active{ transform: translateY(0); }
+
+/* =========================================================
+   PETALS — ambient, sparse, decorative only
+   ========================================================= */
+#petal-layer{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 5;
+}
+.petal{
+  position: absolute;
+  top: -20px;
+  width: 12px;
+  height: 12px;
+  border-radius: 60% 0 60% 0;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+.petal.marigold{ background: var(--marigold); }
+.petal.vermilion{ background: var(--vermilion); }
+@keyframes fall{
+  0%   { transform: translateY(0) translateX(0) rotate(0deg); }
+  100% { transform: translateY(105vh) translateX(24px) rotate(220deg); }
+}
+
+/* =========================================================
+   ENTRANCE
+   ========================================================= */
+#entrance{
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: radial-gradient(circle at 50% 32%, var(--dusk-light), var(--dusk) 72%);
+  padding: 1.5rem;
+  transition: transform .9s cubic-bezier(.6,0,.3,1), opacity .9s ease;
+}
+#entrance.opening{
+  transform: scale(1.18);
+  opacity: 0;
+  pointer-events: none;
+}
+.entrance-inner{ max-width: 420px; }
+.om{
+  display: block;
+  font-size: 2.6rem;
+  color: var(--marigold);
+  margin-bottom: .3em;
+}
+.entrance-kicker{
+  color: var(--cream);
+  opacity: .8;
+  letter-spacing: .04em;
+  margin-bottom: .2em;
+  font-size: .95rem;
+}
+.entrance-title{
+  color: var(--cream);
+  font-size: clamp(2.4rem, 10vw, 3.6rem);
+  margin-bottom: 1.4em;
+}
+#open-btn{
+  background: var(--marigold);
+  color: var(--dusk);
+  font-size: 1rem;
+  padding: .9em 1.8em;
+}
+#open-btn:hover{ box-shadow: 0 6px 18px rgba(246,164,33,.45); }
+
+/* =========================================================
+   MAIN LAYOUT
+   ========================================================= */
+main{ position: relative; overflow: hidden; }
+
+section, footer{
+  padding: 3.5rem 1.5rem;
+}
+
+.hero, .details, .gallery, .rsvp{
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+#audio-btn{
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 15;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--maroon);
+  box-shadow: 0 3px 10px rgba(42,22,16,.2);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Hero --- */
+.hero{ text-align: center; padding-top: 3rem; }
+.kicker{
+  color: var(--vermilion);
+  font-weight: 500;
+  margin-bottom: .3em;
+}
+.hero h1{
+  font-size: clamp(2rem, 7vw, 2.8rem);
+  margin-bottom: .6em;
+}
+.toran{ width: 100%; max-width: 480px; height: 28px; margin: 0 auto 2rem; display: block; }
+
+.hero-frame{
+  width: min(280px, 70vw);
+  aspect-ratio: 1;
+  margin: 0 auto 1.2rem;
+  border-radius: 50%;
+  padding: 8px;
+  background: conic-gradient(from 0deg, var(--gold), var(--marigold), var(--vermilion), var(--gold));
+  box-shadow: 0 10px 30px rgba(92,21,36,.25);
+}
+.hero-frame img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--cream);
+  background: var(--cream-deep);
+}
+.hero-note{ color: var(--maroon); font-style: italic; opacity: .8; }
+
+/* --- Dusk bands (countdown, diya) --- */
+.band{
+  background: radial-gradient(circle at 50% 0%, var(--dusk-light), var(--dusk) 75%);
+  text-align: center;
+}
+.band h2{ color: var(--cream); }
+.band h2::after{
+  content: "";
+  display: block;
+  width: 46px;
+  height: 3px;
+  background: var(--marigold);
+  margin: .6em auto 0;
+  border-radius: 2px;
+}
+
+/* --- Countdown --- */
+.countdown-grid{
+  display: flex;
+  justify-content: center;
+  gap: .8rem;
+  flex-wrap: wrap;
+  margin-top: 1.8rem;
+}
+.cd-box{
+  background: rgba(251,242,222,.08);
+  border: 1px solid rgba(246,164,33,.35);
+  border-radius: 14px;
+  min-width: 72px;
+  padding: .9rem .6rem;
+}
+.cd-box span{
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 6vw, 2.2rem);
+  color: var(--marigold);
+}
+.cd-box label{
+  font-size: .75rem;
+  color: var(--cream);
+  opacity: .75;
+  text-transform: lowercase;
+}
+#cd-done{ color: var(--marigold); font-size: 1.2rem; margin-top: 1.5rem; }
+
+/* --- Details --- */
+.details h2{ text-align: center; margin-bottom: 1.6rem; }
+.detail-grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+.detail-card{
+  background: var(--cream-deep);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-soft);
+  padding: 1.3rem;
+  position: relative;
+}
+.detail-card.wide{ grid-column: 1 / -1; }
+.detail-card h3{ font-size: 1.15rem; margin-bottom: .3em; }
+.detail-date{ font-weight: 600; margin-bottom: .1em; }
+.detail-time{ color: var(--vermilion); margin-bottom: 0; }
+.detail-actions{
+  display: flex;
+  gap: .7rem;
+  flex-wrap: wrap;
+  margin-top: .8rem;
+}
+.detail-actions a, .detail-actions button{
+  font-size: .85rem;
+  padding: .6em 1.1em;
+}
+.detail-actions a{
+  background: transparent;
+  color: var(--vermilion);
+  border: 1px solid var(--vermilion);
+  border-radius: 999px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+.detail-actions button{ background: var(--vermilion); color: var(--cream); }
+
+.aarti-card{
+  margin-top: 1.4rem;
+  border-top: 1px dashed var(--gold);
+  padding-top: 1.2rem;
+}
+.aarti-card h3{ font-size: 1.1rem; text-align: center; }
+#aarti-list{ list-style: none; margin: 0; padding: 0; max-width: 360px; margin-inline: auto; }
+#aarti-list li{
+  display: flex;
+  justify-content: space-between;
+  padding: .5em 0;
+  border-bottom: 1px solid rgba(184,134,11,.25);
+}
+#aarti-list li:last-child{ border-bottom: none; }
+
+/* --- Diya interactive --- */
+.diya-sub{ color: var(--cream); opacity: .7; margin-top: -.6rem; }
+.diya-row{
+  display: flex;
+  justify-content: center;
+  gap: .6rem;
+  flex-wrap: wrap;
+  margin: 1.6rem 0 1rem;
+}
+.diya{
+  background: transparent;
+  padding: .3rem;
+  border-radius: 12px;
+}
+.diya:hover{ transform: translateY(-2px); box-shadow: none; }
+.diya .diya-bowl{ fill: var(--gold); }
+.diya .diya-bowl-front{ fill: #8a6608; }
+.diya .diya-flame{ fill: transparent; transition: fill .3s ease; }
+.diya.lit .diya-flame{
+  fill: var(--marigold);
+  filter: drop-shadow(0 0 7px var(--marigold));
+  animation: flicker 1.6s ease-in-out infinite;
+}
+@keyframes flicker{
+  0%, 100%{ transform: scale(1,1); }
+  50%{ transform: scale(.94,1.08); }
+}
+#diya-message{ color: var(--marigold); font-weight: 500; min-height: 1.4em; }
+
+/* --- Gallery --- */
+.gallery h2{ text-align: center; margin-bottom: 1.6rem; }
+.gallery-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.4rem 1rem;
+}
+.gallery-item{
+  background: var(--cream);
+  border: none;
+  padding: .5rem .5rem 1rem;
+  box-shadow: 0 6px 16px rgba(42,22,16,.18);
+  transform: rotate(var(--rot, 0deg));
+  cursor: pointer;
+  position: relative;
+}
+.gallery-item::before{
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-4deg);
+  width: 46px;
+  height: 18px;
+  background: rgba(246,164,33,.55);
+}
+.gallery-item img{ width: 100%; aspect-ratio: 1; object-fit: cover; }
+.gallery-item.empty{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 130px;
+  border: 2px dashed var(--gold);
+  color: var(--maroon);
+  font-size: .8rem;
+  text-align: center;
+  box-shadow: none;
+  cursor: default;
+}
+.gallery-item.empty::after{ content: "Add your photo here"; padding: 0 .6rem; }
+
+/* --- Lightbox --- */
+#lightbox{
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: rgba(20,8,10,.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+#lightbox img{ max-width: 100%; max-height: 85vh; border-radius: 8px; }
+#lightbox-close{
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  background: transparent;
+  color: var(--cream);
+  font-size: 2rem;
+  line-height: 1;
+  padding: .2em .4em;
+}
+
+/* --- RSVP --- */
+.rsvp{
+  background: var(--cream-deep);
+  border-radius: var(--radius-soft);
+  padding: 2rem 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.rsvp h2{ text-align: center; }
+#rsvp-form{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 420px;
+  margin: 0 auto;
+}
+#rsvp-form label{
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  font-size: .9rem;
+  color: var(--maroon);
+  font-weight: 500;
+}
+.optional{ font-weight: 400; opacity: .6; }
+#rsvp-form input, #rsvp-form textarea{
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: .7em .8em;
+  border-radius: 10px;
+  border: 1px solid var(--gold);
+  background: var(--cream);
+  color: var(--maroon-ink);
+  resize: vertical;
+}
+#rsvp-form button{ margin-top: .4rem; }
+.rsvp-note{ text-align: center; font-size: .8rem; opacity: .65; margin-top: 1rem; margin-bottom: 0; }
+
+/* --- Footer --- */
+footer{
+  background: var(--dusk);
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+.footer-line{
+  font-family: var(--font-display);
+  color: var(--marigold);
+  font-size: 1.3rem;
+  margin-bottom: 1.4rem;
+}
+footer .btn, footer button{ background: var(--marigold); color: var(--dusk); }
+.footer-credit{ color: var(--cream); opacity: .6; margin: 1.4rem 0 0; font-size: .85rem; }
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (min-width: 640px){
+  section, footer{ padding: 4.5rem 2rem; }
+  .detail-grid{ grid-template-columns: 1fr 1fr; }
+  .gallery-grid{ grid-template-columns: repeat(3, 1fr); }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
+  .petal{ display: none; }
+  .diya.lit .diya-flame{ animation: none; }
+  #entrance{ transition: opacity .3s ease; }
+  #entrance.opening{ transform: none; }
+  button, .btn{ transition: none; }
+}
