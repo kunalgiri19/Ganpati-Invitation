@@ -14,7 +14,7 @@ const CONFIG = {
   sthapanaTimeLabel: "4:00 AM (Madhyahna Muhurat)",
 
   visarjanDateTime: "2026-09-25T20:00:00+05:30",
-  visarjanDateLabel: "Friday, 15 September 2026",
+  visarjanDateLabel: "Tuesday, 15 September 2026",
   visarjanTimeLabel: "8:00 PM",
 
   venueName: "Our home",
