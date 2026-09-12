@@ -463,6 +463,48 @@ footer{
 footer .btn, footer button{ background: var(--marigold); color: var(--dusk); }
 .footer-credit{ color: var(--cream); opacity: .6; margin: 1.4rem 0 0; font-size: .85rem; }
 
+.swipe-down {
+  text-align: center;
+  margin: 14px 0 8px;
+  opacity: 0.75;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.swipe-down span {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.swipe-arrow {
+  font-size: 24px;
+  line-height: 1;
+  animation: swipeBounce 1.4s ease-in-out infinite;
+}
+
+@keyframes swipeBounce {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+
+  50% {
+    transform: translateY(7px);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.75;
+  }
+}
+
 /* =========================================================
    RESPONSIVE
    ========================================================= */
