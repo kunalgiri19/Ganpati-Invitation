@@ -5,8 +5,8 @@
    to personalize the site.
    ========================================================= */
 const CONFIG = {
-  familyName: "The Deshmukh Family",
-  heroTitle: "The Deshmukh Family's Ganpati Celebration",
+  familyName: "The Nanekar Family",
+  heroTitle: "The Nanekar Family's Ganpati Celebration",
 
   // ISO date-times with your local UTC offset, e.g. +05:30 for India
   sthapanaDateTime: "2026-09-14T11:00:00+05:30",
@@ -14,20 +14,20 @@ const CONFIG = {
   sthapanaTimeLabel: "11:00 AM (Madhyahna Muhurat)",
 
   visarjanDateTime: "2026-09-25T17:00:00+05:30",
-  visarjanDateLabel: "Friday, 25 September 2026",
+  visarjanDateLabel: "Friday, 15 September 2026",
   visarjanTimeLabel: "5:00 PM",
 
   venueName: "Our home",
-  venueAddress: "123, ABC Housing Society, Andheri West, Mumbai, Maharashtra 400058",
-  mapsQuery: "ABC Housing Society Andheri West Mumbai",
+  venueAddress: "314, Omkar Sai CHS, Near Sai Mandir, Jeevan Vikas Kendra Marg, Kaldongri, VileParle East",
+  mapsQuery: "Omkar Sai CHS LTD, Sai Mandir Marg, Shivaji Nagar, Navapada, Vile Parle, Mumbai 400057",
 
   aarti: [
-    { label: "Morning aarti", time: "7:00 AM" },
+    { label: "Morning aarti", time: "12:00 PM" },
     { label: "Evening aarti", time: "7:30 PM" }
   ],
 
   // Country code + number, digits only, no + or spaces (e.g. 91 for India)
-  whatsappNumber: "911234567890",
+  whatsappNumber: "918291574739",
 
   // How many images to look for in assets/gallery/ (1.jpg, 2.jpg, ...)
   galleryCount: 6,
