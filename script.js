@@ -18,7 +18,7 @@ const CONFIG = {
   visarjanTimeLabel: "8:00 PM",
 
   venueName: "Our home",
-  venueAddress: "312, Omkar Sai CHS, Near Sai Mandir, Jeevan Vikas Kendra Marg, Kaldongri, VileParle East",
+  venueAddress: "312, Omkar Sai CHS, Near Sai Mandir, Jeevan Vikas Kendra Marg, Koldongri, VileParle East",
   mapsQuery: "Omkar Sai CHS LTD, Sai Mandir Marg, Shivaji Nagar, Navapada, Vile Parle, Mumbai 400057",
 
   aarti: [
