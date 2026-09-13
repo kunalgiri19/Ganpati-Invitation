@@ -110,51 +110,134 @@ function wireEntrance(){
   });
 }
 
-/* ---------- audio toggle ---------- */
-/* ---------- audio toggle + background handling ---------- */
+/* ---------- audio toggle + cross-browser background handling ---------- */
 function wireAudioToggle(){
   const btn = document.getElementById('audio-btn');
   const audio = document.getElementById('bg-audio');
 
-  // Tracks whether the user intentionally turned the music off
+  // Whether the user deliberately turned the music off
   let userMuted = false;
 
+  // Whether music was playing before the page went into background
+  let wasPlayingBeforeBackground = false;
+
+  // Prevent duplicate handling when multiple browser events fire
+  let isInBackground = false;
+
+  /* ----- Manual music button ----- */
   btn.addEventListener('click', () => {
+
     if (audio.paused){
       userMuted = false;
 
       audio.play()
-        .then(() => setAudioState(true))
-        .catch(() => setAudioState(false));
+        .then(() => {
+          setAudioState(true);
+        })
+        .catch(() => {
+          setAudioState(false);
+        });
 
     } else {
       userMuted = true;
+      wasPlayingBeforeBackground = false;
+
       audio.pause();
       setAudioState(false);
     }
   });
 
-  // Pause music when the browser/tab goes into the background
+
+  /* ----- Main cross-browser visibility detection ----- */
   document.addEventListener('visibilitychange', () => {
 
-    if (document.hidden){
-      // Browser/app went into background
-      audio.pause();
-      setAudioState(false);
+    if (document.visibilityState === 'hidden'){
+      handleBackground();
 
-    } else {
-      // User returned to this tab
-      if (!userMuted){
-        audio.play()
-          .then(() => setAudioState(true))
-          .catch(() => setAudioState(false));
-      }
+    } else if (document.visibilityState === 'visible'){
+      handleForeground();
     }
   });
+
+
+  /* ----- Additional page lifecycle events ----- */
+  window.addEventListener('pagehide', () => {
+    handleBackground();
+  });
+
+  window.addEventListener('pageshow', () => {
+    handleForeground();
+  });
+
+
+  /* ----- Fallback for browsers that change focus ----- */
+  window.addEventListener('blur', () => {
+
+    // Only treat blur as background if the document is also hidden.
+    // This prevents pausing when the user simply interacts with
+    // something inside the page.
+    if (document.visibilityState === 'hidden'){
+      handleBackground();
+    }
+  });
+
+  window.addEventListener('focus', () => {
+
+    if (document.visibilityState === 'visible'){
+      handleForeground();
+    }
+  });
+
+
+  /* ----- When page goes into background ----- */
+  function handleBackground(){
+
+    if (isInBackground) return;
+
+    isInBackground = true;
+
+    // Remember the current state before stopping the music
+    wasPlayingBeforeBackground = !audio.paused && !audio.ended;
+
+    if (wasPlayingBeforeBackground){
+      audio.pause();
+      setAudioState(false);
+    }
+  }
+
+
+  /* ----- When page comes back ----- */
+  function handleForeground(){
+
+    if (!isInBackground) return;
+
+    isInBackground = false;
+
+    // Only resume if:
+    // 1. Music was playing before leaving
+    // 2. User did not deliberately mute it
+    if (wasPlayingBeforeBackground && !userMuted){
+
+      audio.play()
+        .then(() => {
+          setAudioState(true);
+        })
+        .catch(() => {
+          // Some browsers may block automatic playback.
+          // The user can press the music button to resume.
+          setAudioState(false);
+        });
+    }
+
+    wasPlayingBeforeBackground = false;
+  }
 }
 
+
+/* ---------- audio state ---------- */
 function setAudioState(playing){
   const btn = document.getElementById('audio-btn');
+
   btn.textContent = playing ? '🔊' : '🔈';
   btn.setAttribute('aria-pressed', String(playing));
 }
