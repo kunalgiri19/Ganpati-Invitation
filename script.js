@@ -111,18 +111,48 @@ function wireEntrance(){
 }
 
 /* ---------- audio toggle ---------- */
+/* ---------- audio toggle + background handling ---------- */
 function wireAudioToggle(){
   const btn = document.getElementById('audio-btn');
   const audio = document.getElementById('bg-audio');
+
+  // Tracks whether the user intentionally turned the music off
+  let userMuted = false;
+
   btn.addEventListener('click', () => {
     if (audio.paused){
-      audio.play().then(() => setAudioState(true)).catch(() => setAudioState(false));
+      userMuted = false;
+
+      audio.play()
+        .then(() => setAudioState(true))
+        .catch(() => setAudioState(false));
+
     } else {
+      userMuted = true;
       audio.pause();
       setAudioState(false);
     }
   });
+
+  // Pause music when the browser/tab goes into the background
+  document.addEventListener('visibilitychange', () => {
+
+    if (document.hidden){
+      // Browser/app went into background
+      audio.pause();
+      setAudioState(false);
+
+    } else {
+      // User returned to this tab
+      if (!userMuted){
+        audio.play()
+          .then(() => setAudioState(true))
+          .catch(() => setAudioState(false));
+      }
+    }
+  });
 }
+
 function setAudioState(playing){
   const btn = document.getElementById('audio-btn');
   btn.textContent = playing ? '🔊' : '🔈';
